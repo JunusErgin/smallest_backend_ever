@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Simple JSON POST request</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+
+    <h1 id="result">Speichern und laden</h1>
+
+    <button onclick="save()">JSON speichern</button>
+    <button onclick="load()">JSON laden</button>
+
+    <script>
+        const BASE_SERVER_URL = 'http://students.developerakademie.com/json_to_server/'; // Place of the backend
+        let myJSON = [{
+            "Name": "Claudia"
+        }, {
+            "Name": "Hans"
+        }];
+
+
+        /**
+         * Saves myJSON to server
+         */
+        function save() {
+            updateStatus('Speichern ...');
+            saveJSONToServer(myJSON)
+                .then(function () {
+                    updateStatus('Speichern erfolgreich!');
+                })
+                .catch(function (error) {
+                    updateStatus('Fehler beim Speichern');
+                    console.error('error', error);
+                });
+        }
+
+
+        /**
+         * Loads myJSON from Server
+         */
+        function load() {
+            updateStatus('Laden ...');
+            loadJSONFromServer()
+                .then(function (result) {
+                    console.log(result);
+                    myJSON = JSON.parse(result);
+                    updateStatus('Laden erfolgreich!');
+                })
+                .catch(function (error) {
+                    updateStatus('Fehler beim Laden');
+                    console.error('error', error);
+                });
+        }
+
+
+
+        /**
+         * Saves a JSON or JSON Array to the Server
+         * payload {JSON | Array} - The payload you want to store
+         */
+        function saveJSONToServer(payload) {
+            return new Promise(function (resolve, reject) {
+                let xhttp = new XMLHttpRequest();
+                let serverURL = BASE_SERVER_URL + 'save_json.php';
+                xhttp.open('POST', serverURL);
+
+                xhttp.onreadystatechange = function (oEvent) {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status >= 200 && xhttp.status <= 399) {
+                            resolve(xhttp.responseText);
+                        } else {
+                            reject(xhttp.statusText);
+                        }
+                    }
+                };
+
+                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp.send(JSON.stringify(payload));
+
+            });
+        }
+
+
+
+        /**
+         * Loads a JSON or JSON Array to the Server
+         * payload {JSON | Array} - The payload you want to store
+         */
+        function loadJSONFromServer() {
+            return new Promise(function (resolve, reject) {
+                let xhttp = new XMLHttpRequest();
+                let serverURL = BASE_SERVER_URL + 'my_json.json';
+                xhttp.open('GET', serverURL);
+
+                xhttp.onreadystatechange = function (oEvent) {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status >= 200 && xhttp.status <= 399) {
+                            resolve(xhttp.responseText);
+                        } else {
+                            reject(xhttp.statusText);
+                        }
+                    }
+                };
+
+                xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp.send();
+
+            });
+        }
+
+        function updateStatus(status) {
+            result.innerHTML = status;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST API Docs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+
+        .content {
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+
+        header {
+            background-color: #2b2b2b;
+            padding: 16px;
+            color: #5f5f5f;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        h2 {
+            margin-top: 64px;
+            font-weight: 300;
+            color: #333;
+        }
+
+        .code {
+            margin-top: 16px;
+            background-color: #F7F7F9;
+            padding: 12px;
+            border-radius: 8px;
+            min-height: 10px;
+            border-color: #E9E9EE;
+            font-family: 'consolas' !important;
+        }
+
+        .highlight {
+            color: #1e347b;
+        }
+
+        .gray {
+            color: #93a1a1;
+        }
+
+        #explainBox {
+            min-height: 50px;
+            min-width: 200px;
+            max-width: 400px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 8px;
+            background-color: white;
+            z-index: 999;
+            position: absolute;
+            transition: all 125ms ease-in-out;
+            opacity: 0;
+        }
+
+        .legal {
+            padding-top: 32px;
+            ;
+            padding-bottom: 32px;
+            ;
+        }
+    </style>
+
+
+    <script>
+        function explain(title, element) {
+            let x = element.getBoundingClientRect().x + 70;
+            let y = window.pageYOffset + element.getBoundingClientRect().y - 20;
+            explainBox.innerHTML = title;
+            explainBox.style.top = y + 'px';
+            explainBox.style.left = x + 'px';
+            explainBox.style.opacity = 1;
+
+            element.addEventListener("mouseout", hideExplainBox);
+        }
+
+        function hideExplainBox() {
+            explainBox.style.opacity = 0;
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Deine REST API</h1>
+    </header>
+    <div class="content">
+
+        <div id="explainBox">
+            Hallo das ist ein Text.
+        </div>
+
+        <div class="code" onmouseover="explain('Der Link zur den Endpoints. Api Root ist die URL des Servers.', this)">
+            <b>Api Root</b> <span class="gray">> Snippet List</span>
+        </div>
+
+        <h2 onmouseover="explain('Der Titel der Funktion', this)">Set JSON</h2>
+        <p onmouseover="explain('Hier wird die Funktion der REST API vom Backend-Programmierer beschrieben.', this)">
+            This endpoint is designed to update a JSON on the Server. Just send it a validn JSON payload and it will be
+            stored. Please only send a valid JSON.</p>
+
+        <div class="code">
+            <b
+                onmouseover="explain('Die hier verwendete Methode ist PUT. Man kann das JSON also updaten. Mit POST würde man ein neues JSON erstellen, mit DELETE löschen und mit GET das JSON abrufen.', this)">PUT</b>
+            <span
+                onmouseover="explain('Das hier ist das Ende das Ende der UR, um die Funktion aufzurufen.', this)">/set_json.php/</span>
+        </div>
+
+        <div class="code">
+            <b
+                onmouseover="explain('Wenn alles funktioniert hat, wird der HTTP Status 200 zurückgegeben. 200 bedeutet, dass alles OK ist!', this)">HTTP
+                200 OK</b><br>
+            <b onmouseover="explain('Was für einen Content kannst du dem Server senden?!', this)">Content-Type:</b>
+            <span class="highlight"
+                onmouseover="explain('Der Server akzeptiert Text und HTML. Wir senden also ein JSON als Text (mit JSON.stringify)', this)">text/html</span><br>
+            <b onmouseover="explain('Kann die Antwort vom Server variieren?', this)">Vary:</b> <span class="highlight"
+                onmouseover="explain('Ja! Je nach Anfrage kommt ein unterschiedliches JSON vom Server zurück.', this)">Accept</span><br>
+            <b onmouseover="explain('Was darf ich diesem Endpoint senden?', this)">Allow:</b>
+            <span onmouseover="explain('Der HEAD ist beispielsweise eine Session-ID um dich zu identifizieren.',this)"
+                class="highlight">HEAD</span>,
+            <span class="highlight"
+                onmouseover="explain('OPTIONS kann ignoriert werden. Hier kann man den Server fragen, welche Kommunikationswege der Server Erlaubt. Zum Beispiel HTTP 1.1. ', this)">
+                OPTIONS</span>,
+            <span class="highlight"
+                onmouseover="explain('PUT ist die Methode, um ein JSON upzudaten.', this)">PUT</span><br>
+        </div>
+
+
+
+        <h2 onmouseover="explain('Überschrift der zweiten Funktion, welche die REST API bereitstellt.?', this)">MY JSON
+        </h2>
+        <p onmouseover="explain('Beschreibung der zweiten Funktion?', this)">This endpoint will return the latest
+            version of your updated JSON.</p>
+
+        <div class="code">
+            <b onmouseover="explain('Die HTTP Metode ist GET. Also wird hier ein JSON File abgerufen.', this)">GET</b>
+            <span onmouseover="explain('Die URL des Endpoints.', this)">/my_json.json/</span>
+        </div>
+
+        <div class="code">
+            <b onmouseover="explain('Wenn Status 200 zurückgegeben wird, ist alles OK.', this)">HTTP 200 OK</b><br>
+            <b onmouseover="explain('Welchen Content-Type akzeptiert der Server?', this)">Content-Type:</b> <span
+                class="highlight"
+                onmouseover="explain('Der Server akzeptiert Text oder HTML (Wir senden Text)', this)">text/html</span><br>
+            <b onmouseover="explain('Kann die Antwort vom Server variieren?', this)">Vary:</b> <span class="highlight"
+                onmouseover="explain('Ja! Je nach Anfrage kommt ein unterschiedliches JSON vom Server zurück.', this)">Accept</span><br>
+            <b onmouseover="explain('Was darf ich diesem Endpoint senden?', this)">Allow:</b>
+            <span onmouseover="explain('Der HEAD ist beispielsweise eine Session-ID um dich zu identifizieren.',this)"
+                class="highlight">HEAD</span>,
+            <span class="highlight"
+                onmouseover="explain('OPTIONS kann ignoriert werden. Hier kann man den Server fragen, welche Kommunikationswege der Server Erlaubt. Zum Beispiel HTTP 1.1. ', this)">
+                OPTIONS</span>,
+            <span class="highlight"
+                onmouseover="explain('GET ist die Methode, um ein JSON abzurufen.', this)">GET</span><br>
+            <br>
+        </div>
+
+
+
+        <h2>Was ist eine REST API?</h2>
+        <p>REST steht für <b>REpresentational State Transfer</b>, API für <b>Application Programming Interface</b>.
+            Gemeint ist damit ein <b>Programmierschnittstelle</b> zu einem Backend. Genutzt werden hierfür
+            <b>Endpoints</b>, die über eine URL zu erreichen sind. Auf diese URL führen wir eine der 4 HTTP Optionen
+            aus:
+        <ul>
+            <li>POST: Anlegen von Daten (z.B: ein JSON)</li>
+            <li>GET: Abrufen von Daten (z.B: ein JSON)</li>
+            <li>PUT: Update von Daten</li>
+            <li>DELETE: Löschen von Daten</li>
+        </ul>
+        </p>
+
+        <div class="legal">
+            <a href="https://developerakademie.com/impressum.html">Impressum</a> |
+            <a href="https://developerakademie.com/datenschutz.html">Datenschutz</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
