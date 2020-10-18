@@ -66,7 +66,8 @@
         function saveJSONToServer(payload) {
             return new Promise(function (resolve, reject) {
                 let xhttp = new XMLHttpRequest();
-                let serverURL = BASE_SERVER_URL + 'save_json.php';
+                let proxy = determineProxySettings();
+                let serverURL = proxy + BASE_SERVER_URL + 'my_json.json';
                 xhttp.open('POST', serverURL);
 
                 xhttp.onreadystatechange = function (oEvent) {
@@ -94,7 +95,8 @@
         function loadJSONFromServer() {
             return new Promise(function (resolve, reject) {
                 let xhttp = new XMLHttpRequest();
-                let serverURL = BASE_SERVER_URL + 'my_json.json';
+                let proxy = determineProxySettings();
+                let serverURL = proxy + BASE_SERVER_URL + 'my_json.json';
                 xhttp.open('GET', serverURL);
 
                 xhttp.onreadystatechange = function (oEvent) {
@@ -115,6 +117,14 @@
 
         function updateStatus(status) {
             result.innerHTML = status;
+        }
+        
+        function determineProxySettings() {
+            if (window.location.href.indexOf('.developerakademie.com') > -1) {
+                return '';
+            } else {
+                return 'https://cors-anywhere.herokuapp.com/';
+            }
         }
     </script>
 
