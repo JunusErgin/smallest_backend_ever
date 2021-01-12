@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./mini_backend.js"></script>
+
+    <script>
+        let users = [];
+        setURL('http://developerakademie.com');
+
+        async function init() {
+            await downloadFromServer();
+            users = JSON.parse(backend.getItem('users')) || [];
+        }
+
+
+        function addUser() {
+            users.push(username.value);
+            backend.setItem('users', JSON.stringify(users));
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <input type="text" id="username">
+    <button onclick="addUser()">Add User</button>
+
+</body>
+
+</html>
