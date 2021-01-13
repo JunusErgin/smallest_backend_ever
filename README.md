@@ -19,6 +19,7 @@ There is no security layer implemented. This tool should not be used for product
 - Load, save and delete text similar to the ```localStorage``` API
 
 ## Examples
+If you want to see a full working example, open the file ```example.html```.
 Imagine we're having an array of users:
 ```
 let users = [];
