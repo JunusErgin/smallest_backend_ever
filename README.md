@@ -51,7 +51,5 @@ function deleteUser(name) {
 ```
 
 ## Background
-This projekt was created to explain the usage of a REST API and basic HTTP functions. 
+This projekt was created to explain the usage of a Library and basic HTTP functions for students of Developer Akademie. 
 
-## Docs
-just open the docs.html file
