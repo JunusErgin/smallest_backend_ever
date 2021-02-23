@@ -7,6 +7,9 @@ const backend = {
         return saveJSONToServer();
     },
     getItem: function(key) {
+        if (!jsonFromServer[key]) {
+            return null;
+        }
         return jsonFromServer[key];
     },
     deleteItem: function(key) {
@@ -64,11 +67,22 @@ function saveJSONToServer() {
  * Loads a JSON or JSON Array to the Server
  * payload {JSON | Array} - The payload you want to store
  */
-function loadJSONFromServer() {
+
+async function loadJSONFromServer() {
+    let response = await fetch(BASE_SERVER_URL + '/nocors.php?json=database&noache=' + (new Date().getTime()));
+    return await response.text();
+
+}
+
+function loadJSONFromServerOld() {
     return new Promise(function(resolve, reject) {
         let xhttp = new XMLHttpRequest();
         let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + '/my_json.json?noache=' + (new Date().getTime());
+        let serverURL = proxy + BASE_SERVER_URL + '/nocors.php?json=database&noache=' + (new Date().getTime());
+
+
+
+
         xhttp.open('GET', serverURL);
 
         xhttp.onreadystatechange = function(oEvent) {
@@ -119,6 +133,8 @@ function saveJSONToServer() {
 
 
 function determineProxySettings() {
+    return '';
+
     if (window.location.href.indexOf('.developerakademie.com') > -1) {
         return '';
     } else {

@@ -10,13 +10,15 @@ There is no security layer implemented. This tool should not be used for product
 
 ## Getting started
 ### Server
-- Upload the ```save_json.php``` and ```my_json.json``` file to your FTP server
+- Upload the whole project forder ```smallest_backend_ever``` file to your FTP server
+- Change the folder rights to 777
 
 ### Frontend
 - Add the file ```mini_backend.js``` to your project
 - Include the JS file to your project: ```<script src="./mini_backend.js"></script>```
-- Set the URL to in your JavaScript to the URL of the PHP file on your Server: ```setURL('http://developerakademie.com');```
+- Set the URL to in your JavaScript to the URL of the PHP file on your Server: ```setURL('http://developerakademie.com/smallest_backend_ever');```
 - Load, save and delete text similar to the ```localStorage``` API
+- You might need to install a plugins to bypass CORS, e.g.  [https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf](this one)
 
 ## Examples
 If you want to see a full working example, open the file ```example.html```.
