@@ -37,6 +37,16 @@ function addUser() {
 }
 ```
 
+If you want to wait for the request you can add the `await` keyword as well:
+
+Add a user with this function:
+```
+async function addUser() {
+    users.push('John);
+    await backend.setItem('users', JSON.stringify(users));
+}
+```
+
 ### Load
 Fill your empty array with users from the Server
 ```
