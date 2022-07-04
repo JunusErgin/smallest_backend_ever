@@ -60,7 +60,7 @@ async function init() {
 Delete all users from your array:
 ```
 function deleteUser(name) {
-  backend.deleteItem('users');
+  await backend.deleteItem('users');
 }
 ```
 
