@@ -17,6 +17,7 @@ There is no security layer implemented. This tool should not be used for product
 - Add the file ```mini_backend.js``` to your project
 - Include the JS file to your project: ```<script src="./mini_backend.js"></script>```
 - Set the URL to in your JavaScript to the URL of the PHP file on your Server: ```setURL('http://developerakademie.com/smallest_backend_ever');```
+(e.g. to the `init()` method)
 - Load, save and delete text similar to the ```localStorage``` API
 - You might need to install a plugins to bypass CORS, e.g.  [this one](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
 - Use a [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for local Development
