@@ -1,0 +1,5 @@
+# Füge diese Datei auf höchster Ebene deinem Server hinzu. Dadurch wird das CORS-Problem verhindert.
+<IfModule mod_headers.c>
+  # Set allow Access-Control-Allow-Origin header
+  Header set Access-Control-Allow-Origin "*"
+</IfModule>
